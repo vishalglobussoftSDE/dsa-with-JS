@@ -3,18 +3,20 @@ class Solution {
     maxWater(arr) {
         // code here
         let n = arr.length;
-        let prefix = [arr[0]];
-        let suffix = [arr[n - 1]];
+        let prefix = new Array(n);
+        let suffix = new Array(n);
         let res = 0;
-        for(let i =1;i<n;i++){
-            prefix[i] = Math.max(Prefix[i-1] , arr[i]);
+        prefix[0] = arr[0];
+        for(let i = 1; i < n; i++){
+            prefix[i] = Math.max(prefix[i-1], arr[i]);
         }
-        for(let i = n-1;i>=0 ;i--){
-            suffix[i] = Math.max(suffix[i+1] , arr[i]);
+        suffix[n-1] = arr[n-1];
+        for(let i = n-2; i >= 0; i--){
+            suffix[i] = Math.max(suffix[i+1], arr[i]);
         }
 
-        for(let i =0;i,n;i++){
-            res += Math.min(prefix[i] , suffix[i]) - arr[i];
+        for(let i = 0; i < n; i++){
+            res += Math.min(prefix[i], suffix[i]) - arr[i];
         }
         return res;
         
